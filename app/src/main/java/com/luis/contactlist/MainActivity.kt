@@ -1,10 +1,12 @@
 package com.luis.contactlist
 
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -20,12 +22,27 @@ class MainActivity : AppCompatActivity() {
         }
 
         val rvList = findViewById<RecyclerView>(R.id.rv_list)
+        val iconList = findViewById<ImageView>(R.id.icon_list)
+        val iconGrid = findViewById<ImageView>(R.id.icon_grid)
+        iconList.setOnClickListener {
+            rvList.layoutManager = LinearLayoutManager(this)
+        }
+        iconGrid.setOnClickListener {
+            rvList.layoutManager = GridLayoutManager(this, 2)
+
+        }
+
         val adapter = ContactListAdapter()
         rvList.adapter = adapter
         rvList.layoutManager = LinearLayoutManager(this)
         adapter.submitList(contacts)
 
+        adapter.setOnClickListener { contact ->
+
+        }
+
     }
+
 }
 
 val contacts = listOf(
