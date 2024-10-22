@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 class ContactListAdapter :
     ListAdapter<Contact, ContactListAdapter.ContactViewHolder>(ContactDiffUtils()) {
 
-        lateinit var onClickListener: (Contact) -> Unit
+    private lateinit var onItemClicked: (Contact) -> Unit
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list, parent, false)
         return ContactViewHolder(view)
@@ -20,11 +20,11 @@ class ContactListAdapter :
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         val contact = getItem(position)
-        holder.bind(contact, onClickListener)
+        holder.bind(contact, onItemClicked)
     }
 
     fun setOnClickListener(onCLick: (Contact) -> Unit) {
-        onClickListener = onCLick
+        onItemClicked = onCLick
 
     }
 
